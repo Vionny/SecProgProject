@@ -22,13 +22,17 @@
         $_SESSION['error']="Please input a valid email";
         return false;
       }else if(!strlen($user_password)<8){
-        $_SESSION["error"]= "Password length must be more than equal 8";
+        $_SESSION["error"]= "Password must be more 8 or more letters long";
         return false;
       }else if(strlen($customer_first_name)==0){
         $_SESSION["error"]= "Please input the customer first name";
         return false;
       }else if(strlen($customer_last_name)==0){
         $_SESSION["error"]= "Please input the customer last name";
+      }else if(strlen($customer_last_name)>16){
+        $_SESSION["error"]= "Customer last name is to long";
+      }else if(strlen($customer_first_name)>16){
+        $_SESSION["error"]= "Customer first name is to long";
       }else if($dob < $now){
         $_SESSION["error"]="Please input a valid birth date";
       }else{
@@ -38,8 +42,6 @@
       }
 
     }
-
-
 
   }
 ?>
