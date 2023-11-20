@@ -19,7 +19,7 @@
             }
         ?>
         <form action="../controller/Validation.php" method="post">
-            <label for="username">Username:</label>
+            <label for="username">Email:</label>
             <input type="text" id="username" name="username" required>
 
             <label for="password">Password:</label>
