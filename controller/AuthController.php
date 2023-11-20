@@ -1,5 +1,10 @@
 <?php
-  require "../db/DBConnection.php";
+  require "../db/dbConnection.php";
+  require "../model/customer.php";
+  require "../model/seller.php";
+  require "../model/user.php";
+  require "../utils/encryptService.php";
+
   session_start();
   class AuthController {
 

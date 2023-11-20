@@ -1,8 +1,4 @@
 <?php
-
-    require "../connect.php";
-    require "../db/DBConnection.php";
-    require "../utils/EncryptService.php";
     abstract class User{
         
         protected int $user_id;

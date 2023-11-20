@@ -1,7 +1,4 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
-    require "./Transaction_Detail.php";
 
     class TransactionHeader{
       private int $transaction_id;

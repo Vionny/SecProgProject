@@ -1,6 +1,4 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
 
   class Item{
     private int $item_id;

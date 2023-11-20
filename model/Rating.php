@@ -1,6 +1,4 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
 
     class Rating{
         private int $rating_id;

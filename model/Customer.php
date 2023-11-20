@@ -1,7 +1,5 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
-    require "./User.php";
+
     class Customer extends User{
         private int $user_id;
         private string $customer_first_name;
