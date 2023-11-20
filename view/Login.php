@@ -19,7 +19,7 @@
             }
         ?>
 
-        <form action="../controller/Validation.php" method="post">
+        <form action="../controller/AuthController.php" method="post">
             <label for="email">Email:</label>
             <br>
             <input type="email" id="email" name="email" required>
