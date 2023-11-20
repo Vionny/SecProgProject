@@ -3,11 +3,11 @@
     require "../db/DBConnection.php";
 
     class Rating{
-        private $rating_id;
-        private $item_id;
-        private $customer_id;
-        private $rating;
-        private $comment;
+        private int $rating_id;
+        private int $item_id;
+        private int $customer_id;
+        private int $rating;
+        private string $comment;
 
         public function __construct($rating_id, $item_id, $customer_id, $rating, $comment){ 
             $this->rating_id = $rating_id;

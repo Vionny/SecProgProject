@@ -3,12 +3,12 @@
     require "../db/DBConnection.php";
 
   class Item{
-    private $item_id;
-    private $seller_id;
-    private $item_name;
-    private $item_description;
-    private $item_price;
-    private $item_stock;
+    private int $item_id;
+    private int $seller_id;
+    private string $item_name;
+    private string $item_description;
+    private int $item_price;
+    private int $item_stock;
 
     public function __construct($item_id, $seller_id, $item_name, $item_description, $item_price, $item_stock){
       $this->item_id = $item_id;

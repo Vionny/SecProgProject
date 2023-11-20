@@ -4,11 +4,11 @@
     require "./Transaction_Detail.php";
 
     class TransactionHeader{
-      private $transaction_id;
-      private $customer_id;
-      private $seller_id;
-      private $transaction_date;
-      private $transaction_status;
+      private int $transaction_id;
+      private int $customer_id;
+      private int $seller_id;
+      private int $transaction_date;
+      private int $transaction_status;
       private $transactionDetails;
       
       public function __construct($transaction_id, $customer_id, $seller_id, $transaction_date, $transaction_status, $transactionDetails) {

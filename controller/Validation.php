@@ -17,8 +17,6 @@
 
     if ( $result->num_rows > 0) {
       $_SESSION["error"]= "";
-      $_SESSION["username"] = $username;
-      $_SESSION["password"] = $password;
       $_SESSION["is_login"] = true;
 
       header("Location: ../pages/dashboard.php");
@@ -26,4 +24,5 @@
         $_SESSION["error"]= "Login Failed!";
         header("Location: ../pages/login.php");
     }
+    
 ?>
