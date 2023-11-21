@@ -11,16 +11,7 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
-    <div>
-      <a href="">View Items</a>
-    </div>
-    <div>
-      <a href="">Transaction</a>
-    </div>
-    <div>
-      <a href="../../actions/doLogout.php">Logout</a>
-    </div>
-  </div>
+  This is item view
+  <a href="./insert.php">Insert Item</a>
 </body>
 </html>

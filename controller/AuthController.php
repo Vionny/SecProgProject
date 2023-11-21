@@ -27,6 +27,7 @@
     public static function  logout(){
       session_start();
       header("Location: ../index.php");
+      $_SESSION = array();
       session_destroy();
   }
 
@@ -107,7 +108,7 @@
         $isUser = EncryptService::checkPassword($user_password,$user['user_password']);
         
         if($isUser){
-          $userObj->insertUserToken();
+          $userObj->insertUserToken($user['user_email']);
           return true;
         }
         else return false;

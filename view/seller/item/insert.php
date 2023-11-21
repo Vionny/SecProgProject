@@ -11,16 +11,9 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
-    <div>
-      <a href="">View Items</a>
-    </div>
-    <div>
-      <a href="">Transaction</a>
-    </div>
-    <div>
-      <a href="../../actions/doLogout.php">Logout</a>
-    </div>
-  </div>
+  <form action="../actions/insertItem.php" method="post">
+    <input type="hidden" name="token" value=<?=$_SESSION['token'];?> />
+
+  </form>
 </body>
 </html>

@@ -12,8 +12,6 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
-    <a href="../actions/doLogout.php">Logout</a>
-  </div>
+  
 </body>
 </html>
