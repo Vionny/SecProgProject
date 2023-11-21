@@ -10,11 +10,11 @@
     protected $db;
     protected $conn;
 
-    public function __construct($item_id=null,$seller_id=null, $item_name, $item_description, $item_price, $item_stock){
-      if($item_id!==null &&$seller_id !==null){
+    public function __construct($item_id=null,$seller_id, $item_name, $item_description, $item_price, $item_stock){
+      if($item_id!==null ){
         $this->item_id = $item_id;
-        $this->seller_id = $seller_id;
       }
+      $this->seller_id = $seller_id;
       $this->item_name = $item_name;
       $this->item_description = $item_description;
       $this->item_price = $item_price;
@@ -24,6 +24,7 @@
     }
     
     public function insert() {
+      //TODO : Benerin ini gk ada userid
       $query = "INSERT INTO `items` ( `item_name`,item_description
       ,item_price,item_stock) VALUES (?,?,?,?);";
       $stmt = $this->db->prepare($query);

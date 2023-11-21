@@ -2,7 +2,6 @@
   require_once "../db/dbConnection.php";
   require_once "../model/user.php";
   require_once "../model/customer.php";
-  require_once "../model/Item.php";
   require_once "../model/seller.php";
   require_once "../utils/encryptService.php";
 
@@ -25,7 +24,7 @@
         return self::$instance;
     }
 
-    public static function  logout(){
+    public static function logout(){
       session_start();
       header("Location: ../index.php");
       $_SESSION = array();
@@ -59,7 +58,7 @@
         return false;
       }else{
         $encrypted_password = EncryptService::hashPassword($user_password);
-        $toInsert = new Customer($user_email,$encrypted_password,$customer_first_name,$customer_last_name,$customer_dob,$customer_money);
+        $toInsert = new Customer($user_email,$encrypted_password,$customer_first_name,$customer_last_name,$customer_dob,0);
         $err = $toInsert->insert();
 
         return $err;
@@ -86,13 +85,7 @@
       }
     }
 
-    public function registerItem($item_name, $item_description, $item_price, $item_stock){
-        // $encrypted_password = EncryptService::hashPassword($user_password);
-        $toInsert = new Item($item_name, $item_description, $item_price, $item_stock);
-        $err = $toInsert->insert();
-        return $err;
-      
-    }
+    
 
     public function loginUser($user_email,$user_password){
       
