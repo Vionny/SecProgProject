@@ -41,10 +41,10 @@
       }else if(strlen($user_password)<8){
         $_SESSION["error"]= "Password must be more 8 or more letters long";
         return false;
-      }else if(strlen($customer_first_name)==0){
+      }else if(strlen($customer_first_name)===0){
         $_SESSION["error"]= "Please input the customer first name";
         return false;
-      }else if(strlen($customer_last_name)==0){
+      }else if(strlen($customer_last_name)===0){
         $_SESSION["error"]= "Please input the customer last name";
         return false;
       }else if(strlen($customer_last_name)>25){

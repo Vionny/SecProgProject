@@ -1,5 +1,9 @@
 <?php
-  require_once "../../middleware/RoleMiddleware.php";
+  require_once "../../../utils/EncryptService.php";
+  require_once "../../../db/dbConnection.php";
+  require_once "../../middleware/RoleMiddleware.php"; 
+  require_once "../../../middleware/AuthMiddleware.php";
+  
   RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 

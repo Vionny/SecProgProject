@@ -1,13 +1,10 @@
 <?php
-  require_once "../../middleware/RoleMiddleware.php";
-  RoleMiddleware::getInstance()->checkRole('seller');
-?>
 
-<?php
-    // require "../utils/tokenService.php";
-    // require "../controller/AuthController.php";
-    // session_start();
-    
+  require_once "../../../db/dbConnection.php";
+  require_once "../../../middleware/AuthMiddleware.php";
+  require_once "../../../middleware/RoleMiddleware.php";
+
+  RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 
 

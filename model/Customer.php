@@ -26,15 +26,15 @@
         }
 
         public function insert() {
-            $query = "INSERT INTO `users` (`user_email`, `user_password`, `customer_first_name`,customer_last_name,customer_dob) VALUES (?,?,?,?,?);";
+            $user_type = 'customer';
+            $query = "INSERT INTO `users` (`user_email`, `user_password`, `user_type`) VALUES (?,?,?);";
             $stmt = $this->db->prepare($query);
-            $stmt->bind_param("sssss", $this->user_email, $this->user_password, $this->customer_first_name,
-             $this->customer_last_name,$this->customer_dob);
+            $stmt->bind_param("sss", $this->user_email, $this->user_password, $user_type);
     
             try {
                 $stmt->execute();
             } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 1062) { 
+                if ($e->getCode() === 1062) { 
                     $_SESSION['error'] = "Email already exists";
                 } else {
                     
@@ -46,15 +46,15 @@
             $userId = $stmt->insert_id;
             $stmt->close();
     
-            if ($userId == null) {
+            if ($userId === null) {
                 $_SESSION['error'] = "Error inserting customer";
                 return false;
             } else {
-                $query = "INSERT INTO `users` (`user_email`, `user_password`, `customer_first_name`,customer_last_name
-            ,customer_dob) VALUES (?,?,?,?,?);";
+                $customer_money = 0;
+                $query = "INSERT INTO `customers` (`user_id`, `customer_first_name`,`customer_last_name`,`customer_dob`, `customer_money`) VALUES (?,?,?,?,?);";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("sssss", $this->user_email, $this->user_password, $this->customer_first_name,
-                $this->customer_last_name,$this->customer_dob);
+                $stmt->bind_param("ssssi", $userId, $this->customer_first_name, $this->customer_last_name,
+                $this->customer_dob, $customer_money);
                 try {
                     $stmt->execute();
                 } catch (ErrorException $e) {

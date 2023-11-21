@@ -1,6 +1,5 @@
 <?php
-  require_once "../utils/EncryptService.php";
-  require_once "../db/dbConnection.php";
+  
   class AuthMiddleware{
     
     private static $instance;
@@ -41,9 +40,9 @@
       }
       else{
         $user= $this->checkAuth();
-        if($user['user_type']=='customer'){
+        if($user['user_type']==='customer'){
           header("Location: ../view/customer/home.php");
-        }else if($user['user_type']=='seller'){
+        }else if($user['user_type']==='seller'){
           header("Location: ../view/seller/home.php");
         }
       }
@@ -52,9 +51,9 @@
     public function loggedIn(){
       $user= $this->checkAuth();
       if(isset($_SESSION['token'])&&$user){
-        if($user['user_type']=='customer'){
+        if($user['user_type']==='customer'){
           header("Location: ../view/customer/home.php");
-        }else if($user['user_type']=='seller'){
+        }else if($user['user_type']==='seller'){
           header("Location: ../view/seller/home.php");
         }
       }

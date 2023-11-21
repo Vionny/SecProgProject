@@ -21,7 +21,7 @@
             try {
                 $stmt->execute();
             } catch (mysqli_sql_exception $e) {
-                if ($e->getCode() == 1062) { 
+                if ($e->getCode() === 1062) { 
                     $_SESSION['error'] = "Email already exists";
                 } else {
                     $_SESSION['error'] = "An error occurred: " . $e->getMessage();
@@ -32,7 +32,7 @@
             $userId = $stmt->insert_id;
             $stmt->close();
             
-            if ($userId == null) {
+            if ($userId === null) {
                 $_SESSION['error'] = "Error inserting seller";
                 return false;
             } else {

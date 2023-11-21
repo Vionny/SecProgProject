@@ -1,7 +1,4 @@
 <?php
-  require_once "../db/dbConnection.php";
-  require_once "./AuthMiddleware.php";
-
   class RoleMiddleware{
     private static $instance;
     protected $conn;
@@ -31,14 +28,14 @@
         $userType = $result->fetch_assoc()['user_type'];
         if($result->num_rows <1) {
           unset($_SESSION['token']);
-          header("Location: ../view/login.php");
-        }else if($userType == 'customer' && $accessTo == 'seller'){
-          header("Location: ../view/customer/home.php");
-        }else if($userType == 'seller' && $accessTo == 'customer'){
-          header("Location: ../view/seller/home.php");
+          header("Location: ../../view/login.php");
+        }else if($userType === 'customer' && $accessTo === 'seller'){
+          header("Location: ../../view/customer/home.php");
+        }else if($userType === 'seller' && $accessTo === 'customer'){
+          header("Location: ../../view/seller/home.php");
         }
       }else{
-        header("Location: ../view/login.php");
+        header("Location: ../../view/login.php");
       }
     }
 
