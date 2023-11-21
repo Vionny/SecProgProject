@@ -35,7 +35,7 @@
                 }
 
                 echo "</td>
-                    <td><a href='view_transaction.php?transaction_id=$transactionId'>View Details</a></td>
+                    <td><a href='viewtransaction.php?transaction_id=$transactionId'>View Details</a></td>
                     <td><a href='transactionlist.php?delete_transaction=$transactionId'>Delete</a></td>
                 </tr>";
             }
