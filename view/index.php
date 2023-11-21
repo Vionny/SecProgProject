@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION["is_login"])) {
+        header("Location: view/Login.php");
+        exit();
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +15,9 @@
 </head>
 <body>
     <h1>Asal Aja</h1>
-    <a href="pages/login.php">Login</a>
-    <a href="pages/register.php">Register</a>
+    <h1>Welcome, <?= $_SESSION["username"] ?></h1>
+
+    
+   
 </body>
 </html>
