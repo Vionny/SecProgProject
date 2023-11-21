@@ -25,7 +25,27 @@ function generateTransactionId() {
 
 // Function to save the shopping cart with a transaction ID
 function saveCart($cart, $transactionId) {
-    $_SESSION['saved_carts'][$transactionId] = $cart;
+    if (empty($cart)) {
+        echo "Error: Your shopping cart is empty. Add items to the cart before saving.";
+        return;
+    }
+
+    $_SESSION['saved_carts'][$transactionId] = array(
+        'cart' => $cart,
+        'transaction_date' => date('Y-m-d H:i:s') // Save the current date and time
+    );
+
+    // Reset the cart and redirect back to index.php after saving the cart
+    resetCart();
+    header("Location: ../index.php");
+    exit();
+}
+
+// Function to restock items
+function restockItems($item_id, $quantity, &$items) {
+    if (isset($items[$item_id])) {
+        $items[$item_id]['item_stock'] += $quantity;
+    }
 }
 
 function addToCart($item_id, $quantity, &$items) {
@@ -77,6 +97,14 @@ function displayProducts($items) {
                 <label for='quantity'>Quantity:</label>
                 <input type='number' name='quantity' value='1' min='1' max='{$item['item_stock']}' required>
                 <button type='submit'>Add to Cart</button>
+            </form>
+            
+            <!-- Add restock form -->
+            <form method='POST' action=''>
+                <input type='hidden' name='restock_item_id' value='{$item['item_id']}'>
+                <label for='restock_quantity'>Restock Quantity:</label>
+                <input type='number' name='restock_quantity' value='1' min='1' required>
+                <button type='submit'>Restock</button>
             </form></li>";
         }
         echo "</ul>";
@@ -128,10 +156,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Save the shopping cart with a new transaction ID
         $transactionId = generateTransactionId();
         saveCart($_SESSION['cart'], $transactionId);
-        echo "Shopping cart saved successfully with transaction ID: $transactionId";
-
-        // Reset the cart and redirect back to index.php after saving the cart
-        resetCartAndRedirect();
+    } elseif (isset($_POST['restock_item_id']) && isset($_POST['restock_quantity'])) {
+        // Restock items
+        $restock_item_id = $_POST['restock_item_id'];
+        $restock_quantity = $_POST['restock_quantity'];
+        restockItems($restock_item_id, $restock_quantity, $_SESSION['items']);
+        echo "Items restocked successfully.";
     }
 }
 ?>
