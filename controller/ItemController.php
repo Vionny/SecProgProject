@@ -1,6 +1,6 @@
 <?php
-  require_once("../AuthMiddleware");
-  require_once("../");
+  require_once("../middleware/AuthMiddleware.php");
+  // require_once("../");
   class ItemController {
 
     private static $instance;

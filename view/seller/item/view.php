@@ -4,7 +4,7 @@
   require_once "../../../middleware/RoleMiddleware.php"; 
   require_once "../../../middleware/AuthMiddleware.php";
   
-  // RoleMiddleware::getInstance()->checkRole('seller');
+  RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 
 <!DOCTYPE html>
@@ -15,26 +15,28 @@
   <title>Document</title>
 </head>
 <body>
+<h1>WELCOME SELLER</h1> 
+<h1>This is item view</h1>
   <?php
 
 
     $query = "select * from items";
+    
     $conn = new mysqli(
       'localhost','root','','secprogdb');
     $result = mysqli_query($conn, $query);
       foreach ($result as $row) {
-          echo 'item name'. $row['item_name'] ;
+        
+          echo 'item name : '. $row['item_name'] ;
+        echo "<br>";
       }
   ?>
-  This is item view
-  <h1>WELCOME SELLER</h1> 
-    <a href="item2sell.php">
+  
+  
+    <a href="./insert.php">
         <button>Choose game to sell item</button>
     </a>
     <br><br><br>
-    <a href="item2list.php">
-    <button>Item list</button>
-  </a>
   <a href="./insert.php">Insert Item</a>
 </body>
 </html>

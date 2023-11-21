@@ -22,8 +22,12 @@
       <a href="">Transaction</a>
     </div>
     <div>
+      <a href="./item/insert.php">Add Item</a>
+    </div>
+    <div>
       <a href="../../actions/doLogout.php">Logout</a>
     </div>
+
   </div>
 </body>
 </html>

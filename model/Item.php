@@ -21,14 +21,15 @@
       $this->item_stock = $item_stock;
       $this->conn = Connect::getInstance();
       $this->db = $this->conn->getDBConnection();
+      
     }
     
     public function insert() {
       //TODO : Benerin ini gk ada userid
-      $query = "INSERT INTO `items` ( 'seller_id',`item_name`,item_description
+      $query = "INSERT INTO `items` (seller_id,item_name,item_description
       ,item_price,item_stock) VALUES (?,?,?,?,?);";
       $stmt = $this->db->prepare($query);
-      $stmt->bind_param("sssii", $this->seller_id,$this->item_name, $this->item_description, 
+      $stmt->bind_param("issii", $this->seller_id,$this->item_name, $this->item_description, 
       $this->item_price,$this->item_stock);
       $stmt->execute();
     }

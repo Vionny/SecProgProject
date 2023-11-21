@@ -4,7 +4,7 @@
   require_once "../../../middleware/AuthMiddleware.php";
   require_once "../../../middleware/RoleMiddleware.php";
 
-  // RoleMiddleware::getInstance()->checkRole('seller');
+  RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 
 
@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <form action="../../../actions/doSellItem.php" method="POST">
+    <form action="../../../actions/doInsertItem.php" method="POST">
     item name :
     
     <input type="text"  name="item_name">
