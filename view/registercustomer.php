@@ -1,5 +1,8 @@
 <?php
-    // require "../db/DBConnection.php";
+    require "db/DBConnection.php";
+    require "utils/EncryptService.php";
+    require "controller/AuthController.php";
+    
     session_start();
     
 
@@ -14,7 +17,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="../controller/AuthController.php" 
+    <form action="registercustomer.php" 
     method="post">
     <h1>WELCOME SELLER</h1>
     email :
@@ -34,7 +37,7 @@
       
     Date Of Birth
     <br>
-    <input type="date" name="customer_DOB"><br>
+    <input type="date" name="customer_dob"><br>
     <br>
     
     <input type="submit" name="submit" value="register">
@@ -42,3 +45,20 @@
     
 </body>
 </html>
+
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+
+    $customer_validation = new AuthController();
+    $customer_validation->registerAsCustomer($_POST['customer_email'],
+    $_POST['customer_password'],$_POST['customer_first_name'],$_POST['customer_last_name'],
+    $_POST['customer_dob']);
+
+    echo $_SESSION['error'];
+//     $seller_validation = AuthController::registerAsCustomer($_POST['customer_email'],
+// $_POST['customer_password'],$_POST['customer_first_name'],$_POST['customer_last_name'],
+// $_POST['customer_dob']);
+}
+?>
