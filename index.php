@@ -7,7 +7,8 @@
 </head>
 <body>
     <h1>Asal Aja</h1>
-    <a href="pages/login.php">Login</a>
-    <a href="pages/register.php">Register</a>
+    <a href="view/Login.php">Login</a>
+    <a href="view/register.php">Register</a>
+    <a href="view/Transaction.php">Transaction</a>
 </body>
 </html>
