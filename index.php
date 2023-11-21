@@ -10,5 +10,6 @@
     <a href="view/Login.php">Login</a>
     <a href="view/register.php">Register</a>
     <a href="view/Transaction.php">Transaction</a>
+    <a href="view/transactionlist.php">Transaction Lists</a>
 </body>
 </html>

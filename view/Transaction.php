@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+// Function to reset the shopping cart
+function resetCart() {
+    $_SESSION['cart'] = array();
+}
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
@@ -11,6 +16,16 @@ if (!isset($_SESSION['items'])) {
         '2' => array('item_id' => 2, 'item_name' => 'Product 2', 'item_price' => 15, 'item_stock' => 30),
         '3' => array('item_id' => 3, 'item_name' => 'Product 3', 'item_price' => 20, 'item_stock' => 20),
     );
+}
+
+// Function to generate a unique transaction ID
+function generateTransactionId() {
+    return uniqid('transaction_');
+}
+
+// Function to save the shopping cart with a transaction ID
+function saveCart($cart, $transactionId) {
+    $_SESSION['saved_carts'][$transactionId] = $cart;
 }
 
 function addToCart($item_id, $quantity, &$items) {
@@ -42,6 +57,13 @@ function reduceQuantity($item_id, $quantity, &$items) {
     } else {
         return false; 
     }
+}
+
+// Function to reset the cart and redirect
+function resetCartAndRedirect() {
+    resetCart();
+    header("Location: ../index.php");
+    exit();
 }
 
 function displayProducts($items) {
@@ -102,6 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "Error reducing quantity.";
         }
+    } elseif (isset($_POST['save_cart'])) {
+        // Save the shopping cart with a new transaction ID
+        $transactionId = generateTransactionId();
+        saveCart($_SESSION['cart'], $transactionId);
+        echo "Shopping cart saved successfully with transaction ID: $transactionId";
+
+        // Reset the cart and redirect back to index.php after saving the cart
+        resetCartAndRedirect();
     }
 }
 ?>
@@ -112,14 +142,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simple Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        form {
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            margin-right: 10px;
+        }
+
+        input[type="number"] {
+            width: 50px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Welcome to our store</h1>
+    
+        <?php displayProducts($_SESSION['items']); ?>
+    
+        <?php displayCart($_SESSION['items']); ?>
 
-    <h1>Welcome to our store</h1>
-
-    <?php displayProducts($_SESSION['items']); ?>
-
-    <?php displayCart($_SESSION['items']); ?>
-
+        <!-- Add the save button -->
+        <form method='POST' action=''>
+            <button type='submit' name='save_cart'>Save Cart</button>
+        </form>
+    </div>
 </body>
 </html>
