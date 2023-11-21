@@ -5,6 +5,14 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
+if (!isset($_SESSION['items'])) {
+    $_SESSION['items'] = array(
+        '1' => array('item_id' => 1, 'item_name' => 'Product 1', 'item_price' => 10, 'item_stock' => 50),
+        '2' => array('item_id' => 2, 'item_name' => 'Product 2', 'item_price' => 15, 'item_stock' => 30),
+        '3' => array('item_id' => 3, 'item_name' => 'Product 3', 'item_price' => 20, 'item_stock' => 20),
+    );
+}
+
 function addToCart($item_id, $quantity, &$items) {
     if (isset($_SESSION['cart'][$item_id])) {
         $_SESSION['cart'][$item_id] += $quantity;
@@ -75,18 +83,12 @@ function displayCart($items) {
     }
 }
 
-$items = array(
-    '1' => array('item_id' => 1, 'item_name' => 'Product 1', 'item_price' => 10, 'item_stock' => 50),
-    '2' => array('item_id' => 2, 'item_name' => 'Product 2', 'item_price' => 15, 'item_stock' => 30),
-    '3' => array('item_id' => 3, 'item_name' => 'Product 3', 'item_price' => 20, 'item_stock' => 20),
-);
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['quantity'])) {
         $item_id = $_POST['item_id'];
         $quantity = $_POST['quantity'];
 
-        if (addToCart($item_id, $quantity, $items)) {
+        if (addToCart($item_id, $quantity, $_SESSION['items'])) {
             echo "Item added to the cart successfully.";
         } else {
             echo "Insufficient stock.";
@@ -95,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $item_id = $_POST['item_id'];
         $reduce_quantity = $_POST['reduce_quantity'];
 
-        if (reduceQuantity($item_id, $reduce_quantity, $items)) {
+        if (reduceQuantity($item_id, $reduce_quantity, $_SESSION['items'])) {
             echo "Quantity reduced successfully.";
         } else {
             echo "Error reducing quantity.";
@@ -115,9 +117,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <h1>Welcome to our store</h1>
 
-    <?php displayProducts($items); ?>
+    <?php displayProducts($_SESSION['items']); ?>
 
-    <?php displayCart($items); ?>
+    <?php displayCart($_SESSION['items']); ?>
 
 </body>
 </html>
