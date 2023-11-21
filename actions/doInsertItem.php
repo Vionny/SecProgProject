@@ -20,7 +20,6 @@ if($isInserted){
   header("Location: ../view/sellerAddItem.php");
   return;
 }else{
-    echo "heloo";
   header("Location: ../view/sellerAddItem.php");
   return;
 }
