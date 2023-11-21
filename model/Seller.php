@@ -20,8 +20,12 @@
     
             try {
                 $stmt->execute();
-            } catch (ErrorException $e) {
-                $_SESSION['error'] = "Insert data error: " . $e->getMessage();
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 1062) { 
+                    $_SESSION['error'] = "Email already exists";
+                } else {
+                    $_SESSION['error'] = "An error occurred: " . $e->getMessage();
+                }
                 return false;
             }
     

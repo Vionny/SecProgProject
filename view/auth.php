@@ -1,9 +1,5 @@
 <?php
     session_start();
-    if (!isset($_SESSION["is_login"])) {
-        header("Location: view/Login.php");
-        exit();
-    }
 ?>
 
 <!DOCTYPE html>
@@ -14,10 +10,11 @@
     <title>Web</title>
 </head>
 <body>
-    <h1>Asal Aja</h1>
-    <h1>Welcome, <?= $_SESSION["username"] ?></h1>
-
-    
-   
+    <h1>Saya Ngantuk</h1>
+    <a href="login.php">login</a>
+    <br>
+    <a href="registerCustomer.php">register for customer</a>
+    <br>
+    <a href="registerCustomer.php">register for seller</a>
 </body>
 </html>

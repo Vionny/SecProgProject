@@ -40,7 +40,6 @@
     <ul>
       <li><a href="./dashboard.php">Home</a></li>
       <li><a href="./aboutUs.php">About us</a></li>
-      <li><a href="#">Transaction</a></li>
       <li><a href="#">Register</a></li>
       <li><a href="./login.php">Login</a></li>
     </ul>
