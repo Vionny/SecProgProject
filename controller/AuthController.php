@@ -24,23 +24,11 @@
         return self::$instance;
     }
 
-    public static function isAuth(){
-      $token = $_SESSION['token'];
-      if(empty($token)) return false;
-      else{
-          $token = EncryptService::decryptData($_SESSION);
-          $query = "SELECT * FROM users WHERE user_token= ?";
-          $statement = self::$db->prepare($query);
-          $statement->bind_param("s", $token);
-          $statement->execute();
-          $result = $statement->get_result();
-          if($result->num_rows !=1) {
-              $_SESSION['error'] = "Error fetching user";
-              return false;
-          }
-          return true;
-      }
-    }
+    public static function  logout(){
+      session_start();
+      header("Location: ../index.php");
+      session_destroy();
+  }
 
     public function registerAsCustomer($user_email, $user_password, $customer_first_name, $customer_last_name, $customer_dob){
 
@@ -110,6 +98,7 @@
         $_SESSION['error']="Please input a valid email";
         return false;
       }else{
+        
         $userObj = new User();
         $user = $userObj->getUser($user_email);
         if(!$user){

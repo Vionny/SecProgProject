@@ -1,7 +1,8 @@
 <?php
     require "../utils/tokenService.php";
     session_start();
-    
+    require_once "../middleware/AuthMiddleware.php";
+    AuthMiddleware::getInstance()->loggedIn();
 ?>
 
 

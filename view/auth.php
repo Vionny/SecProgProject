@@ -1,5 +1,7 @@
 <?php
     session_start();
+    require_once "../middleware/AuthMiddleware.php";
+    AuthMiddleware::getInstance()->loggedIn();
 ?>
 
 <!DOCTYPE html>
