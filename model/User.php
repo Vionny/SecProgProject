@@ -33,19 +33,18 @@
             $statement->bind_param("s", $user_email); 
             $statement->execute();
             $result = $statement->get_result();
-            
+            $user = $result->fetch_assoc();
             if($result->num_rows !=1) {
                 $_SESSION['error'] = "Error fetching user";
                 return false;
             }
             
-            $user = $result->fetch_assoc();
             $statement->close();
             return $user;
             
     }
     private function setToken($newToken){
-        $query = "UPDATE users SET token=?";
+        $query = "UPDATE users SET user_token=?";
         $statement = $this->db->prepare($query);
         $encryptedData = EncryptService::encryptData($newToken);
         $encryptedToken = EncryptService::getEncryptedData($encryptedData);

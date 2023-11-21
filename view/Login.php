@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="login-container">
-        <input type="hidden" name="token" value=<?=generateToken();?> />
+        
         <h2>Login</h2>
         <?php
             if(isset($_SESSION["error"])) {
@@ -21,10 +21,7 @@
             }
         ?>
         <form action="../actions/doLogin.php" method="post">
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-
-        <form action="../controller/AuthController.php" method="post">
+        <input type="hidden" name="token" value=<?=generateToken();?> />
             <label for="email">Email:</label>
             <br>
             <input type="email" id="email" name="email" required>

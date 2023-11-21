@@ -21,6 +21,7 @@
   
   if($isUser){
     //TODO : Redirect to home
+    header('Location: ../view/home.php');
   }else{
     header("Location: ../view/login.php");
   }

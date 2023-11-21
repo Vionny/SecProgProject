@@ -1,9 +1,9 @@
 <?php
-  require "../db/dbConnection.php";
-  require "../model/user.php";
-  require "../model/customer.php";
-  require "../model/seller.php";
-  require "../utils/encryptService.php";
+  require_once "../db/dbConnection.php";
+  require_once "../model/user.php";
+  require_once "../model/customer.php";
+  require_once "../model/seller.php";
+  require_once "../utils/encryptService.php";
 
   session_start();
   class AuthController {
@@ -40,7 +40,7 @@
           }
           return true;
       }
-  }
+    }
 
     public function registerAsCustomer($user_email, $user_password, $customer_first_name, $customer_last_name, $customer_dob){
 
@@ -102,8 +102,10 @@
       
       if(empty($user_email)){
         $_SESSION["error"]= "Email must be filled";
+        return false;
       }else if(empty($user_password)){
         $_SESSION["error"]= "Password must be filled";
+        return false;
       }else if(!filter_var($user_email, FILTER_VALIDATE_EMAIL)){
         $_SESSION['error']="Please input a valid email";
         return false;
@@ -114,7 +116,11 @@
           return false;
         }
         $isUser = EncryptService::checkPassword($user_password,$user['user_password']);
-        if($isUser) return true;
+        
+        if($isUser){
+          $userObj->insertUserToken();
+          return true;
+        }
         else return false;
       }
     }

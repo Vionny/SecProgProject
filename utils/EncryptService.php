@@ -1,6 +1,6 @@
 <?php
   class EncryptService {
-    private $key = "S3cPr0gG3m1nk";
+    private static $key = "S3cPr0gG3m1nk";
     public static function hashPassword($password) {
       
       return password_hash($password,PASSWORD_BCRYPT);
@@ -31,7 +31,8 @@
       $options = 0;
       $iv = substr($combinedData, 0, 16);
       $encryptedData = self::getEncryptedData($combinedData);
-      $decryptedData = openssl_decrypt($encryptedData, $cipher, self::$key, $options, $iv);
+      $decryptedData = openssl_decrypt($encryptedData, $cipher, self::
+      $key, $options, $iv);
 
       return $decryptedData;
     }
