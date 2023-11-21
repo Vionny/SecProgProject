@@ -27,6 +27,15 @@
         ?>
         <hr>
           <div>
+            <?php
+              if(!empty($item['item_photo'])){
+                ?>
+                <?php var_dump("hellow");?>
+                  <img src="<?= "../../../".$item['item_photo']?>">
+                <?php
+              }
+            ?>
+            
             <div>
               <label>Item name : <?= htmlspecialchars($item['item_name'])?></label>
             </div>
