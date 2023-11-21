@@ -29,7 +29,7 @@
           $_SESSION['error'] = "Error fetching user";
           header("Location: ../view/login.php");
       }
-      return true;
+      return $result->fetch_assoc();
     }
 
     public function isAuth(){
@@ -38,13 +38,23 @@
         header('Location: ../view/login.php');
       }
       else{
-          return $this->checkAuth();
+        $user= $this->checkAuth();
+        if($user['user_type']=='customer'){
+          header("Location: ../view/customer/home.php");
+        }else if($user['user_type']=='seller'){
+          header("Location: ../view/seller/home.php");
+        }
       }
     }
     
     public function loggedIn(){
-      if(isset($_SESSION['token'])&&$this->checkAuth()){
-        header('Location: ../view/home.php');
+      $user= $this->checkAuth();
+      if(isset($_SESSION['token'])&&$user){
+        if($user['user_type']=='customer'){
+          header("Location: ../view/customer/home.php");
+        }else if($user['user_type']=='seller'){
+          header("Location: ../view/seller/home.php");
+        }
       }
     }
   }
