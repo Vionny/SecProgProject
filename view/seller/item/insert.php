@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <form action="../../../actions/doSellItem.php" method="POST">
+    <form action="../../../actions/doInsertItem.php" method="POST">
     item name :
     
     <input type="text"  name="item_name">
