@@ -1,9 +1,3 @@
-<?php
-  session_start();
-  require_once "../middleware/AuthMiddleware.php";
-  AuthMiddleware::getInstance()->isAuth();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +6,6 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
-    <a href="../actions/doLogout.php">Logout</a>
-  </div>
+  
 </body>
 </html>

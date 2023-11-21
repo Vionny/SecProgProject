@@ -20,12 +20,6 @@
 
         public function insert(){}
 
-        public static function  logout(){
-            session_start();
-            header("Location: ../index.php");
-            session_destroy();
-        }
-
         public function getUser($user_email){
             
             $query = "SELECT * FROM users WHERE user_email=?";
@@ -48,7 +42,6 @@
         $statement = $this->db->prepare($query);
         $encryptedData = EncryptService::encryptData($newToken);
         $encryptedToken = EncryptService::getEncryptedData($encryptedData);
-        $_SESSION['token'] = $encryptedToken;
         $statement->bind_param("s", $encryptedData); 
         $statement->execute();
         $statement->close();
@@ -58,8 +51,10 @@
     
 
     public function insertUserToken(){
+        unset($_SESSION['token']);
         $newToken = generateToken();
         $encryptedToken = $this->setToken($newToken);
+        if(isset($_SESSION['token'])) $_SESSION['token'] = '';
         $_SESSION['token'] = $encryptedToken;
     }
 }

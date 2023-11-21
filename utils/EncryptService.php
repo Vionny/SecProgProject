@@ -17,7 +17,7 @@
       $options = 0;
 
       $encryptedData = openssl_encrypt($data, $cipher, self::$key, $options, $iv);
-      $token = $iv . $encryptedData;
+      $token = $encryptedData;
       return $token;
     }
 
@@ -25,10 +25,10 @@
       $encryptedData = substr($combinedData, 16);
       return $encryptedData;
     }
-
     public static function decryptData($combinedData){
       $cipher = "aes-256-cbc";
       $options = 0;
+      var_dump($combinedData);
       $iv = substr($combinedData, 0, 16);
       $encryptedData = self::getEncryptedData($combinedData);
       $decryptedData = openssl_decrypt($encryptedData, $cipher, self::
