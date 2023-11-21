@@ -19,8 +19,13 @@
 <h1>This is item view</h1>
   <?php
 
+$user = AuthMiddleware::getInstance()->checkAuth();
 
-    $query = "select * from items";
+    $userId=$user['user_id'];
+
+    $_SESSION['user_id'] = $userId;
+ 
+    $query = "select * from items WHERE seller_id = $userId";
     
     $conn = new mysqli(
       'localhost','root','','secprogdb');

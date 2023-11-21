@@ -27,7 +27,7 @@
       $user = AuthMiddleware::getInstance()->checkAuth();
 
       $userId=$user['user_id'];
-      
+      $_SESSION['user_id'] = $userId;
       // $userId = 0;
       $toInsert = new Item(null,$userId,$item_name, $item_description, $item_price, $item_stock);
       $err = $toInsert->insert();
