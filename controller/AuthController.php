@@ -65,13 +65,11 @@
         $_SESSION["error"]= "Customer first name is too long";
         return false;
       }else if($dob >= $now){
-        var_dump($dob,$now, $dob < $now);
-        die();
         $_SESSION["error"]="Please input a valid birth date";
         return false;
       }else{
         $encrypted_password = EncryptService::hashPassword($user_password);
-        $toInsert = new Customer($user_email,$encrypted_password,'customer',$customer_first_name,$customer_last_name,$customer_dob,0);
+        $toInsert = new Customer($user_email,$encrypted_password,$customer_first_name,$customer_last_name,$customer_dob);
         $err = $toInsert->insert();
 
         return $err;
