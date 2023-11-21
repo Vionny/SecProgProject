@@ -16,20 +16,22 @@
       return self::$instance;
     }
 
-    private function checkAuth(){
-      $token = $_SESSION['token'];
-      $query = "SELECT * FROM users WHERE SUBSTR(user_token,17)= ?";
-      $statement = $this->db->prepare($query);
-      $statement->bind_param("s", $token);
-      $statement->execute();
-      $result = $statement->get_result();
-      // var_dump($_SESSION['token']);
-      // die();
-      if($result->num_rows <1) {
-          $_SESSION['error'] = "Error fetching user";
-          header("Location: ../view/login.php");
+    public function checkAuth(){
+      if(isset($_SESSION['token'])){
+        $token = $_SESSION['token'];
+        $query = "SELECT * FROM users WHERE SUBSTR(user_token,17)= ?";
+        $statement = $this->db->prepare($query);
+        $statement->bind_param("s", $token);
+        $statement->execute();
+        $result = $statement->get_result();
+        // var_dump($_SESSION['token']);
+        // die();
+        if($result->num_rows <1) {
+            unset($_SESSION['token']);
+        }
+        return $result->fetch_assoc();
       }
-      return $result->fetch_assoc();
+      
     }
 
     public function isAuth(){

@@ -1,5 +1,5 @@
 <?php
-    require "../utils/tokenService.php";
+    require_once "../utils/tokenService.php";
     session_start();
     require_once "../middleware/AuthMiddleware.php";
     AuthMiddleware::getInstance()->loggedIn();
@@ -14,12 +14,12 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        if(isset($_SESSION["error"])) {
-            echo "<p>". $_SESSION["error"] ."</p>";
-            unset($_SESSION["error"]);
-        }
-    ?>
+        <?php
+            if(isset($_SESSION["error"])) {
+                echo "<p>". $_SESSION["error"] ."</p>";
+                unset($_SESSION["error"]);
+            }
+        ?>
     <form action="../actions/doRegisterSeller.php" method="post">
         <input type="hidden" name="token" value=<?=generateToken();?> />
         <h1>WELCOME SELLER</h1>

@@ -37,12 +37,12 @@
             return $user;
             
     }
-    private function setToken($newToken){
-        $query = "UPDATE users SET user_token=?";
+    private function setToken($newToken,$user_email){
+        $query = "UPDATE users SET user_token=? WHERE user_email = ?";
         $statement = $this->db->prepare($query);
         $encryptedData = EncryptService::encryptData($newToken);
         $encryptedToken = EncryptService::getEncryptedData($encryptedData);
-        $statement->bind_param("s", $encryptedData); 
+        $statement->bind_param("ss", $encryptedData,$user_email); 
         $statement->execute();
         $statement->close();
         return $encryptedToken;
@@ -50,10 +50,10 @@
 
     
 
-    public function insertUserToken(){
+    public function insertUserToken($user_email){
         unset($_SESSION['token']);
         $newToken = generateToken();
-        $encryptedToken = $this->setToken($newToken);
+        $encryptedToken = $this->setToken($newToken,$user_email);
         if(isset($_SESSION['token'])) $_SESSION['token'] = '';
         $_SESSION['token'] = $encryptedToken;
     }
