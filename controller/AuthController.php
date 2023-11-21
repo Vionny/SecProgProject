@@ -2,6 +2,7 @@
   require_once "../db/dbConnection.php";
   require_once "../model/user.php";
   require_once "../model/customer.php";
+  require_once "../model/Item.php";
   require_once "../model/seller.php";
   require_once "../utils/encryptService.php";
 
@@ -69,7 +70,7 @@
         return false;
       }else{
         $encrypted_password = EncryptService::hashPassword($user_password);
-        $toInsert = new Customer($user_email,$encrypted_password,$customer_first_name,$customer_last_name,$customer_dob);
+        $toInsert = new Customer($user_email,$encrypted_password,$customer_first_name,$customer_last_name,$customer_dob,$customer_money);
         $err = $toInsert->insert();
 
         return $err;
@@ -94,6 +95,14 @@
         $err = $toInsert->insert();
         return $err;
       }
+    }
+
+    public function registerItem($item_name, $item_description, $item_price, $item_stock){
+        // $encrypted_password = EncryptService::hashPassword($user_password);
+        $toInsert = new Item($item_name, $item_description, $item_price, $item_stock);
+        $err = $toInsert->insert();
+        return $err;
+      
     }
 
     public function loginUser($user_email,$user_password){
