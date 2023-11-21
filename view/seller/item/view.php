@@ -1,10 +1,12 @@
 <?php
   require_once "../../../utils/EncryptService.php";
   require_once "../../../db/dbConnection.php";
-  require_once "../../middleware/RoleMiddleware.php"; 
+  require_once "../../../middleware/RoleMiddleware.php"; 
   require_once "../../../middleware/AuthMiddleware.php";
-  
+  require_once "../../../model/Item.php";
   RoleMiddleware::getInstance()->checkRole('seller');
+
+  $result = item::getSellerItem();
 ?>
 
 <!DOCTYPE html>
@@ -15,15 +17,40 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- //TODO : list itemnya semua disini -->
-  This is item view
   <h1>WELCOME SELLER</h1> 
-    <a href="item2sell.php">
+    <a href="">
         <button>Choose game to sell item</button>
     </a>
     <br><br><br>
-    <a href="item2list.php">
-    <button>Item list</button>
+    <?php
+      while($item = $result->fetch_assoc()){
+        ?>
+        <hr>
+          <div>
+            <div>
+              <label>Item name : <?= htmlspecialchars($item['item_name'])?></label>
+            </div>
+            <div>
+              <label>Item description : <?= htmlspecialchars($item['item_description'])?></label>
+            </div>
+            <div>
+              <label>Item Price : Rp. <?= htmlspecialchars($item['item_price'])?></label>
+            </div>
+            <div>
+              <label>Item Stock : <?= htmlspecialchars($item['item_stock'])?></label>
+            </div>
+          </div>
+          <form method="POST">
+            <button type="submit">Update</button>
+          </form>
+          <form action="../../../actions/doDeleteItem.php" method="POST">
+            <input type="hidden"name="item_id" value="<?=$item['item_id']?>">
+            <button type="submit">Delete</button>
+          </form>
+        <hr>
+        <?php
+      }
+    ?>
   </a>
   <a href="./insert.php">Insert Item</a>
 </body>

@@ -16,7 +16,7 @@
 <body>
   <div>
     <div>
-      <a href="">View Items</a>
+      <a href="./item/view.php">View Items</a>
     </div>
     <div>
       <a href="">Transaction</a>
