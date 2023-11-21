@@ -1,16 +1,11 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
-    require "./User.php";
+
     class Seller extends User{
-        private int $user_id;
+        protected int $user_id;
         private string $seller_name;
         private string $seller_address;
         private $seller_money;
 
-        
-        private $conn = Connect::getInstance();
-        private $db = $this->conn->getDBConnection();
         public function __construct($user_email, $user_password, $user_type, $seller_name, $seller_address, $seller_money ){
             parent::__construct($user_email, $user_password, $user_type);
             $this->seller_name = $seller_name;
@@ -25,21 +20,25 @@
     
             try {
                 $stmt->execute();
-            } catch (ErrorException $e) {
-                $_SESSION['error'] = "Insert data error: " . $e->getMessage();
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() === 1062) { 
+                    $_SESSION['error'] = "Email already exists";
+                } else {
+                    $_SESSION['error'] = "An error occurred: " . $e->getMessage();
+                }
                 return false;
             }
     
             $userId = $stmt->insert_id;
             $stmt->close();
             
-            if ($userId == null) {
+            if ($userId === null) {
                 $_SESSION['error'] = "Error inserting seller";
                 return false;
             } else {
                 $query = "INSERT INTO sellers(`user_id`,`seller_name`,`seller_address`,`seller_money`) VALUES (?,?,?,?)";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("isss",$this->user_id,$this->seller_name, $this->seller_address, $this->seller_money);
+                $stmt->bind_param("isss",$userId,$this->seller_name, $this->seller_address, $this->seller_money);
 
                 try {
                     $stmt->execute();
