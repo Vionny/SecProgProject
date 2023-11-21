@@ -1,23 +1,47 @@
 <?php
   require "../db/dbConnection.php";
+  require "../model/user.php";
   require "../model/customer.php";
   require "../model/seller.php";
-  require "../model/user.php";
   require "../utils/encryptService.php";
 
   session_start();
   class AuthController {
 
     private static $instance;
-    private function __construct() {}
+    private $conn;
+    protected $db;
+    private function __construct() {
+      $this->conn = Connect::getInstance();
+      $this->db = $this->conn->getDBConnection();
+    }
     
     
     public static function getInstance() {
         if (self::$instance === null) {
-            self::$instance = new self();
+            self::$instance = new AuthController();
         }
         return self::$instance;
     }
+
+    public static function isAuth(){
+      $token = $_SESSION['token'];
+      if(empty($token)) return false;
+      else{
+          $token = EncryptService::decryptData($_SESSION);
+          $query = "SELECT * FROM users WHERE user_token= ?";
+          $statement = self::$db->prepare($query);
+          $statement->bind_param("s", $token);
+          $statement->execute();
+          $result = $statement->get_result();
+          if($result->num_rows !=1) {
+              $_SESSION['error'] = "Error fetching user";
+              return false;
+          }
+          return true;
+      }
+  }
+
     public function registerAsCustomer($user_email, $user_password, $customer_first_name, $customer_last_name, $customer_dob){
 
       $dob = new DateTime($customer_dob);
@@ -73,6 +97,7 @@
     }
 
     public function loginUser($user_email,$user_password){
+      
       if(empty($user_email)){
         $_SESSION["error"]= "Email must be filled";
       }else if(empty($user_password)){
@@ -81,9 +106,14 @@
         $_SESSION['error']="Please input a valid email";
         return false;
       }else{
-        $user = User::getUser($user_email);
+        $userObj = new User();
+        $user = $userObj->getUser($user_email);
+        if(!$user){
+          return false;
+        }
         $isUser = EncryptService::checkPassword($user_password,$user['user_password']);
-        return $isUser;
+        if($isUser) return true;
+        else return false;
       }
     }
 

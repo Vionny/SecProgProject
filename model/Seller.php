@@ -1,16 +1,11 @@
 <?php
-    require "../connect.php";
-    require "../db/DBConnection.php";
-    require "./User.php";
+
     class Seller extends User{
-        private int $user_id;
+        protected int $user_id;
         private string $seller_name;
         private string $seller_address;
         private $seller_money;
 
-        
-        private $conn = Connect::getInstance();
-        private $db = $this->conn->getDBConnection();
         public function __construct($user_email, $user_password, $user_type, $seller_name, $seller_address, $seller_money ){
             parent::__construct($user_email, $user_password, $user_type);
             $this->seller_name = $seller_name;

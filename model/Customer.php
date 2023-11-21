@@ -1,13 +1,11 @@
 <?php
 
     class Customer extends User{
-        private int $user_id;
+        protected int $user_id;
         private string $customer_first_name;
         private string $customer_last_name;
         private string $customer_dob;
         private string $customer_money;
-        private $conn = Connect::getInstance();
-        private $db = $this->conn->getDBConnection();
 
         public function __construct($user_email, $user_password, $user_type, $customer_first_name, $customer_last_name, $customer_dob, $customer_money) {
             parent::__construct($user_email, $user_password, $user_type);
