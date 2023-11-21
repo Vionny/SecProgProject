@@ -1,11 +1,7 @@
 <?php
-    // require "../db/DBConnection.php";
+    require_once "../utils/tokenService.php";
     session_start();
-    
-
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,30 +10,33 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="../controller/AuthController.php" 
-    method="post">
-    <h1>WELCOME SELLER</h1>
-    email :
-    <br>
-    <input type="email" name="customer_email"><br>
-    password :
-    <br>
-    <input type="password" name="customer_password"><br>
-
-    first name :
-    <br>
-    <input type="text" name="customer_first_name"><br>
-
-    last name :
-    <br>
-    <input type="text" name="customer_last_name"><br>
-      
-    Date Of Birth
-    <br>
-    <input type="date" name="customer_DOB"><br>
-    <br>
-    
-    <input type="submit" name="submit" value="register">
+    <?php
+        if(isset($_SESSION["error"])) {
+            echo "<p>". $_SESSION["error"] ."</p>";
+            unset($_SESSION["error"]);
+        }
+    ?>
+    <form action="../actions/doRegisterCustomer.php" method="post">
+        <input type="hidden" name="token" value=<?=generateToken();?> />
+        <h1>WELCOME CUSTOMER</h1>
+        email :
+        <br>
+        <input type="email" name="customer_email"><br>
+        password :
+        <br>
+        <input type="password" name="customer_password"><br>
+        first name :
+        <br>
+        <input type="text" name="customer_first_name"><br>
+        last name :
+        <br>
+        <input type="text" name="customer_last_name"><br>
+        Date Of Birth
+        <br>
+        <input type="date" name="customer_dob"><br>
+        <br>
+        
+        <input type="submit" name="submit" value="register">
     </form>
     
 </body>

@@ -34,7 +34,7 @@
             } else {
                 $query = "INSERT INTO sellers(`user_id`,`seller_name`,`seller_address`,`seller_money`) VALUES (?,?,?,?)";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("isss",$this->user_id,$this->seller_name, $this->seller_address, $this->seller_money);
+                $stmt->bind_param("isss",$userId,$this->seller_name, $this->seller_address, $this->seller_money);
 
                 try {
                     $stmt->execute();

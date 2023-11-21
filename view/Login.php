@@ -20,7 +20,7 @@
                 unset($_SESSION["error"]);
             }
         ?>
-        <form action="../action/doLogin.php" method="post">
+        <form action="../actions/doLogin.php" method="post">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required>
 

@@ -1,6 +1,6 @@
 <?php
-  require "../controller/AuthController.php";
-  require "../utils/tokenService.php";
+  require_once "../controller/AuthController.php";
+  require_once "../utils/tokenService.php";
 
   $auth = AuthController::getInstance();
 

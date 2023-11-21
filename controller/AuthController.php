@@ -58,13 +58,15 @@
       }else if(strlen($customer_last_name)==0){
         $_SESSION["error"]= "Please input the customer last name";
         return false;
-      }else if(strlen($customer_last_name)>16){
-        $_SESSION["error"]= "Customer last name is to long";
+      }else if(strlen($customer_last_name)>25){
+        $_SESSION["error"]= "Customer last name is too long";
         return false;
-      }else if(strlen($customer_first_name)>16){
-        $_SESSION["error"]= "Customer first name is to long";
+      }else if(strlen($customer_first_name)>25){
+        $_SESSION["error"]= "Customer first name is too long";
         return false;
-      }else if($dob < $now){
+      }else if($dob >= $now){
+        var_dump($dob,$now, $dob < $now);
+        die();
         $_SESSION["error"]="Please input a valid birth date";
         return false;
       }else{
@@ -77,20 +79,20 @@
 
     }
 
-    public function registerSeller($user_email, $user_password, $seller_name, $seller_address, $seller_money){
+    public function registerAsSeller($user_email, $user_password, $seller_name, $seller_address){
       if(!filter_var($user_email, FILTER_VALIDATE_EMAIL)){
         $_SESSION['error']="Please input a valid email";
         return false;
       }else if(strlen($user_password)<8){
         $_SESSION["error"]= "Password must be 8 or more letters long";
         return false;
-      }else if(strlen($seller_name)<8){
-        $_SESSION["error"] = "Seller Name must be more than 8 ";
-      }else if(strlen($$seller_address)<15){
+      }else if(strlen($seller_name)<5){
+        $_SESSION["error"] = "Seller Name must be more than 5 ";
+      }else if(strlen($seller_address)<15){
         $_SESSION["error"] = "Seller address must be more than 15 ";
       }else{
         $encrypted_password = EncryptService::hashPassword($user_password);
-        $toInsert = new Seller($user_email,$encrypted_password,'seller',$seller_name,$seller_address,$seller_money);
+        $toInsert = new Seller($user_email,$encrypted_password,'seller',$seller_name,$seller_address,0);
         $err = $toInsert->insert();
         return $err;
       }

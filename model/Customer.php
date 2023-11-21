@@ -22,8 +22,13 @@
     
             try {
                 $stmt->execute();
-            } catch (ErrorException $e) {
-                $_SESSION['error'] = "Insert data error: " . $e->getMessage();
+            } catch (mysqli_sql_exception $e) {
+                if ($e->getCode() == 1062) { 
+                    $_SESSION['error'] = "Email already exists";
+                } else {
+                    
+                    $_SESSION['error'] = "An error occurred: " . $e->getMessage();
+                }
                 return false;
             }
     
@@ -34,9 +39,9 @@
                 $_SESSION['error'] = "Error inserting customer";
                 return false;
             } else {
-                $query = "INSERT INTO customer (`user_id`, `customer_first_name`, `customer_last_name`, `customer_money`) VALUES (?, ?, ?, ?)";
+                $query = "INSERT INTO `customers` (`user_id`, `customer_first_name`, `customer_last_name`, `customer_money`,`customer_dob`) VALUES (?, ?, ?, ?,?)";
                 $stmt = $this->db->prepare($query);
-                $stmt->bind_param("issd", $userId, $this->customer_first_name, $this->customer_last_name, $this->customer_money);
+                $stmt->bind_param("issds", $userId, $this->customer_first_name, $this->customer_last_name, $this->customer_money,$this->customer_dob);
     
                 try {
                     $stmt->execute();
