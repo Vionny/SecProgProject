@@ -18,7 +18,8 @@
         return self::$instance;
     }
 
-    public function registerItem($item_name, $item_description, $item_price, $item_stock){
+    public function registerItem($item_name, $item_description, 
+    $item_price, $item_stock,$file_path){
      
       // TODO : Ambil userId dari Authmiddleware
       // pny check bs dpt current user kok
@@ -27,9 +28,9 @@
       $user = AuthMiddleware::getInstance()->checkAuth();
 
       $userId=$user['user_id'];
-      // $_SESSION['user_id'] = $userId;
-      // $userId = 0;
-      $toInsert = new Item(null,$userId,$item_name, $item_description, $item_price, $item_stock);
+  
+      $toInsert = new Item(null,$userId,$item_name, $item_description, 
+      $item_price, $item_stock,$file_path);
       $err = $toInsert->insert();
       return $err;
     

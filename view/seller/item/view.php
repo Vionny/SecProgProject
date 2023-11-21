@@ -33,7 +33,12 @@ $user = AuthMiddleware::getInstance()->checkAuth();
       foreach ($result as $row) {
         
           echo 'item name : '. $row['item_name'] ;
-        echo "<br>";
+
+          echo "<br>";
+        echo "pict : ";
+        $file_name = '../../../../storage/' . $row['file_path'];
+        echo "<img src='$file_name' alt='Image'>";
+        echo "<br>";echo "<br>";echo "<br>";
       }
   ?>
   
@@ -42,6 +47,10 @@ $user = AuthMiddleware::getInstance()->checkAuth();
         <button>Choose game to sell item</button>
     </a>
     <br><br><br>
-  <a href="./insert.php">Insert Item</a>
+
+  <!-- <a href="./insert.php">Insert Item</a> -->
+
+
+
 </body>
 </html>

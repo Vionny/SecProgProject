@@ -17,7 +17,9 @@
 </head>
 <body>
 
-    <form action="../../../actions/doInsertItem.php" method="POST">
+    <form action="../../../actions/doInsertItem.php" method="POST"
+    enctype="multipart/form-data"
+    >
     item name :
     
     <input type="text"  name="item_name">
