@@ -1,10 +1,10 @@
 <?php
   require_once "../../../utils/EncryptService.php";
   require_once "../../../db/dbConnection.php";
-  require_once "../../middleware/RoleMiddleware.php"; 
+  require_once "../../../middleware/RoleMiddleware.php"; 
   require_once "../../../middleware/AuthMiddleware.php";
   
-  RoleMiddleware::getInstance()->checkRole('seller');
+  // RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 
 <!DOCTYPE html>
@@ -15,7 +15,17 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- //TODO : list itemnya semua disini -->
+  <?php
+
+
+    $query = "select * from items";
+    $conn = new mysqli(
+      'localhost','root','','secprogdb');
+    $result = mysqli_query($conn, $query);
+      foreach ($result as $row) {
+          echo 'item name'. $row['item_name'] ;
+      }
+  ?>
   This is item view
   <h1>WELCOME SELLER</h1> 
     <a href="item2sell.php">

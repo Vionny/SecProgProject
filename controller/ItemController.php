@@ -1,4 +1,6 @@
 <?php
+  require_once("../AuthMiddleware");
+  require_once("../");
   class ItemController {
 
     private static $instance;
@@ -17,9 +19,16 @@
     }
 
     public function registerItem($item_name, $item_description, $item_price, $item_stock){
-      // $encrypted_password = EncryptService::hashPassword($user_password);
-      // TODO : Ambil userId dari Authmiddleware pny check bs dpt current user kok
-      $userId = 0;
+     
+      // TODO : Ambil userId dari Authmiddleware
+      // pny check bs dpt current user kok
+
+      
+      $user = AuthMiddleware::getInstance()->checkAuth();
+
+      $userId=$user['user_id'];
+      
+      // $userId = 0;
       $toInsert = new Item(null,$userId,$item_name, $item_description, $item_price, $item_stock);
       $err = $toInsert->insert();
       return $err;

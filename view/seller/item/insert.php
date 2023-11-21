@@ -4,7 +4,7 @@
   require_once "../../../middleware/AuthMiddleware.php";
   require_once "../../../middleware/RoleMiddleware.php";
 
-  RoleMiddleware::getInstance()->checkRole('seller');
+  // RoleMiddleware::getInstance()->checkRole('seller');
 ?>
 
 
