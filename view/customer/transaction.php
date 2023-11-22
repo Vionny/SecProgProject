@@ -1,3 +1,9 @@
+<?php
+     require_once "../../middleware/RoleMiddleware.php";
+
+     RoleMiddleware::getInstance()->checkRole('customer');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

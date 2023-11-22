@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once '../../db/DBConnection.php';
+require_once "../../middleware/RoleMiddleware.php";
 
+RoleMiddleware::getInstance()->checkRole('customer');
 $conn = Connect::getInstance()->getDBConnection();
 
 $items = fetchItemsFromDatabase(); 

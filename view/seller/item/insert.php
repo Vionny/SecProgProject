@@ -18,6 +18,8 @@
     <title></title>
 </head>
 <body>
+
+<!-- ../../../actions/doInsertItem.php -->
     <form action="../../../actions/doInsertItem.php" method="POST"
     enctype="multipart/form-data"
     >
@@ -33,7 +35,7 @@
     <br><br>
     item price :
     <!-- <br> -->
-    <input type="text"  name="item_price" required>
+    <input type="number"  name="item_price" required>
 
     <br><br>
     item stock :
@@ -49,6 +51,11 @@
     <br><br>
     <input type="submit" name="submit" value="submit">
     </form>
+
+    <!-- <?php 
+    // $item_name  = $_POST['item_name'];
+    //   var_dump($item_name);
+    ?> -->
 </body>
 </html>
 

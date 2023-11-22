@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+require_once "../../middleware/RoleMiddleware.php";
+
+RoleMiddleware::getInstance()->checkRole('customer');
 require_once '../../db/DBConnection.php';
 
 function displayTransactionDetails($transactionId, $savedCarts, $conn) {
