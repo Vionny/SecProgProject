@@ -10,12 +10,7 @@
     }
 
     if (!isset($_SESSION['items'])) {
-
-       
-        
-        $_SESSION['items'] = array(
-            
-        );
+        $_SESSION['items'] = array();
     }
 
     function generateTransactionId() {
@@ -83,7 +78,6 @@
         echo "<h2>Product List</h2>";
         if (!empty($items)) {
             echo "<ul>";
-
             $query = "select * from items";
     
             $conn = new mysqli(
@@ -250,7 +244,6 @@
     <body>
         <div class="container">
             <h1>Welcome to our store</h1>
-            
             
             <?php 
                 displayProducts($_SESSION['items']);

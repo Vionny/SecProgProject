@@ -1,6 +1,8 @@
 <?php
+  // session_start();
 
   require_once "../../../db/dbConnection.php";
+  require_once "../../../utils/tokenService.php";
   require_once "../../../middleware/AuthMiddleware.php";
   require_once "../../../middleware/RoleMiddleware.php";
 
@@ -16,34 +18,33 @@
     <title></title>
 </head>
 <body>
-
     <form action="../../../actions/doInsertItem.php" method="POST"
     enctype="multipart/form-data"
     >
     item name :
     
-    <input type="text"  name="item_name">
+    <input type="text"  name="item_name" required>
 
     <br><br>
     item description :
     
-    <input type="text"  name="item_description">
+    <input type="text"  name="item_description" required>
 
     <br><br>
     item price :
     <!-- <br> -->
-    <input type="text"  name="item_price">
+    <input type="text"  name="item_price" required>
 
     <br><br>
     item stock :
     
-    <input type="number"  name="item_stock">
+    <input type="number"  name="item_stock" required>
 
 
     <br><br>
     input picture of the item :
     <br>
-    <input type="file"  name="item_file">
+    <input type="file" name="item_file" id="item_file" accept=".jpg, .jpeg, .png, .gif" required>
 
     <br><br>
     <input type="submit" name="submit" value="submit">
