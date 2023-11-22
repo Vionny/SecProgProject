@@ -103,7 +103,7 @@
                                 if ($transactionDate !== null) {
                                     $transactionDate = new DateTime($transactionDate, new DateTimeZone('UTC'));
                                     $transactionDate->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                                    echo $transactionDate->format('Y-m-d H:i:s');
+                                    echo $transactionDate->format('Y-m-d');
                                 } else {
                                     echo "-";
                                 }
