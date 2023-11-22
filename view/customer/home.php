@@ -19,10 +19,10 @@
       <a href="">Item</a>
     </div>
     <div>
-      <a href="">Transaction</a>
+      <a href="./transaction.php">Transaction</a>
     </div>
     <div>
-      <a href="">Cart</a>
+      <a href="./cart.php">Cart</a>
     </div>
     <div>
       <a href="../../actions/doLogout.php">Logout</a>
