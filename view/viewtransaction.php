@@ -26,15 +26,15 @@
             foreach ($transaction as $itemId => $quantity) {
                 $itemName = "Product $itemId";
                 $itemPrice = 10 + $itemId * 5;
-
+            
                 echo "<tr>
-                    <td>$itemId</td>
-                    <td>$itemName</td>
-                    <td>\$$itemPrice</td>
-                    <td>$quantity</td>
+                    <td>" . htmlspecialchars($itemId) . "</td>
+                    <td>" . htmlspecialchars($itemName) . "</td>
+                    <td>" . htmlspecialchars("$" . $itemPrice) . "</td>
+                    <td>" . htmlspecialchars($quantity) . "</td>
                 </tr>";
             }
-
+                
             echo "</table>";
         } else {
             echo "Transaction not found.";

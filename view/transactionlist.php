@@ -24,29 +24,30 @@
                     <th>Action</th>
                 </tr>";
 
-            foreach ($savedCarts as $transactionId => $transaction) {
-                $customerId = 'CU1'; 
-                $sellerId = 'SE1'; 
-
-                echo "<tr>
-                    <td>$transactionId</td>
-                    <td>$customerId</td>
-                    <td>$sellerId</td>
-                    <td>";
-
-                if (isset($transaction['transaction_date'])) {
-                    $transactionDate = new DateTime($transaction['transaction_date'], new DateTimeZone('UTC'));
-                    $transactionDate->setTimezone(new DateTimeZone('Asia/Jakarta'));
-                    echo $transactionDate->format('Y-m-d H:i:s');
-                } else {
-                    echo "-";
+                foreach ($savedCarts as $transactionId => $transaction) {
+                    $customerId = 'CU1'; 
+                    $sellerId = 'SE1';   
+                
+                    echo "<tr>
+                        <td>" . htmlspecialchars($transactionId) . "</td>
+                        <td>" . htmlspecialchars($customerId) . "</td>
+                        <td>" . htmlspecialchars($sellerId) . "</td>
+                        <td>";
+                    if (isset($transaction['transaction_date'])) {
+                        $transactionDate = new DateTime($transaction['transaction_date'], new DateTimeZone('UTC'));
+                        $transactionDate->setTimezone(new DateTimeZone('Asia/Jakarta'));
+                
+                        echo htmlspecialchars($transactionDate->format('Y-m-d H:i:s'));
+                    } else {
+                        echo "-";
+                    }
+                
+                    echo "</td>
+                        <td><a href='viewtransaction.php?transaction_id=" . htmlspecialchars($transactionId) . "'>View Details</a></td>
+                        <td><a href='transactionlist.php?delete_transaction=" . htmlspecialchars($transactionId) . "'>Delete</a></td>
+                    </tr>";
                 }
-
-                echo "</td>
-                    <td><a href='viewtransaction.php?transaction_id=$transactionId'>View Details</a></td>
-                    <td><a href='transactionlist.php?delete_transaction=$transactionId'>Delete</a></td>
-                </tr>";
-            }
+                
 
             echo "</table>";
         }
