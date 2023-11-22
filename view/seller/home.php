@@ -19,7 +19,7 @@
       <a href="./item/view.php">View Items</a>
     </div>
     <div>
-      <a href="">Transaction</a>
+      <a href="./transaction.php">Transaction</a>
     </div>
     <div>
       <a href="./item/insert.php">Add Item</a>

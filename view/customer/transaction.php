@@ -1,9 +1,3 @@
-<?php
-     require_once "../../middleware/RoleMiddleware.php";
-
-     RoleMiddleware::getInstance()->checkRole('customer');
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -128,8 +122,7 @@
                         $stmt->close();
                     }
                 }
-
-
+                
                 function deleteTransaction($conn, $transactionId) {
                     $stmt = $conn->prepare("DELETE FROM transactions_header WHERE transaction_id = ?");
                     $stmt->bind_param("i", $transactionId);
