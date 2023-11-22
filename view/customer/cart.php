@@ -49,7 +49,7 @@ function saveCart($cart) {
 
     $customerId = 1;
     $sellerId = 1;
-    $transactionDate = date('Y-m-d H:i:s');
+    $transactionDate = date('Y-m-d');
 
     $stmt->execute();
     $stmt->close();
