@@ -123,7 +123,7 @@ function reduceQuantity($item_id, $quantity, &$items) {
 
 function resetCartAndRedirect() {
     resetCart();
-    header("Location: ./home.php");
+    header("Location: ./transaction.php");
     exit();
 }
 
