@@ -16,13 +16,10 @@
 <body>
   <div>
     <div>
-      <a href="">Item</a>
+      <a href="./cart.php">Item</a>
     </div>
     <div>
-      <a href="">Transaction</a>
-    </div>
-    <div>
-      <a href="">Cart</a>
+      <a href="./transaction.php">Transaction</a>
     </div>
     <div>
       <a href="../../actions/doLogout.php">Logout</a>
