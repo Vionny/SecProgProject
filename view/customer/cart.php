@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once '../../db/DBConnection.php';
+require_once '../../middleware/AuthMiddleware.php';
 
 $conn = Connect::getInstance()->getDBConnection();
 
@@ -15,9 +16,9 @@ function fetchItemsFromDatabase() {
 
     $items = array();
 
-    $stmt = $conn->prepare("SELECT item_id, item_name, item_description, item_price, item_stock FROM items");
+    $stmt = $conn->prepare("SELECT item_id, item_name, item_description, item_price, item_stock, seller_id FROM items");
     $stmt->execute();
-    $stmt->bind_result($itemId, $itemName, $itemDescription, $itemPrice, $itemStock);
+    $stmt->bind_result($itemId, $itemName, $itemDescription, $itemPrice, $itemStock, $seller_id);
 
     while ($stmt->fetch()) {
         $items[$itemId] = array(
@@ -26,6 +27,7 @@ function fetchItemsFromDatabase() {
             'item_description' => $itemDescription,
             'item_price' => $itemPrice,
             'item_stock' => $itemStock,
+            'seller_id' => $seller_id
         );
     }
 
@@ -45,12 +47,11 @@ function saveCart($cart) {
     date_default_timezone_set('Asia/Jakarta');
 
     $stmt = $conn->prepare("INSERT INTO transactions_header (customer_id, seller_id, transaction_date) VALUES (?, ?, ?)");
-    $stmt->bind_param("iis", $customerId, $sellerId, $transactionDate);
-
-    $customerId = 1;
+    $user = AuthMiddleware::getInstance()->checkAuth();
+    $customerId = $user['user_id'];
     $sellerId = 1;
     $transactionDate = date('Y-m-d H:i:s');
-
+    $stmt->bind_param("iis", $customerId, $sellerId, $transactionDate);
     $stmt->execute();
     $stmt->close();
 

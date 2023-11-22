@@ -50,10 +50,10 @@
                             </tr>";
 
                             foreach ($conn as $transactionId => $transactionDetails) {
-                                $customerId = CU1;
-                                $sellerId = SE1;
+                                $customerId = $transactionDetails["customer_id"];
+                                $sellerId = $transactionDetails["id"];
                                 $transactionDate = $transactionDetails['transaction_date'];
-                            
+                                
                                 echo "<tr>
                                     <td>$transactionId</td>
                                     <td>$customerId</td>
