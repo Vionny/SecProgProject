@@ -255,6 +255,9 @@
         </style>
     </head>
     <body>
+        <div>
+            <a href="./home.php">Back to Store</a>
+        </div>
         <div class="container">
             <h1>Welcome to our store</h1>
         
