@@ -17,7 +17,6 @@
       if($item_id!==null ){
         $this->item_id = $item_id;
       }
-      $this->file_path = $file_path;
       $this->seller_id = $seller_id;
       $this->item_name = $item_name;
       $this->item_description = $item_description;
@@ -26,7 +25,6 @@
       $this->item_file = $item_file;
       $this->conn = Connect::getInstance();
       $this->db = $this->conn->getDBConnection();
-      
     }
     
     public function insert() {
@@ -38,7 +36,6 @@
         $stmt->bind_param("issiis", $this->seller_id,$this->item_name, $this->item_description, $this->item_price,$this->item_stock,$uploaded);
         $stmt->execute();
         $stmt->close();
-
         return true;
       } else {
         return false;
