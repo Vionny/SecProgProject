@@ -19,7 +19,7 @@
       <a href="">Item</a>
     </div>
     <div>
-      <a href="">Transaction</a>
+      <a href="../transactionlist.php">Transaction</a>
     </div>
     <div>
       <a href="">Cart</a>
