@@ -11,13 +11,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web</title>
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 <body>
-    <h1>Saya Ngantuk</h1>
-    <a href="login.php">login</a>
-    <br>
-    <a href="registerCustomer.php">register for customer</a>
-    <br>
-    <a href="registerCustomer.php">register for seller</a>
+    <h1>Welcome to our Website!</h1>
+    <a href="login.php">Login</a>
+    <a href="registerCustomer.php">Register for Customer</a>
+    <a href="registerCustomer.php">Register for Seller</a>
 </body>
 </html>
