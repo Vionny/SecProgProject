@@ -22,44 +22,51 @@
         <button>Choose game to sell item</button>
     </a>
     <br><br><br>
-    <?php
-      while($item = $result->fetch_assoc()){
-        ?>
-        <hr>
-          <div>
-            <?php
-              if(!empty($item['item_photo'])){
-                ?>
-                <?php var_dump("hellow");?>
-                  <img src="<?= "../../../".$item['item_photo']?>">
+    
+      <?php
+        while($item = $result->fetch_assoc()){
+          ?>
+          <div style="display:flex;flex-direction:row">
+            <div>
+              <div style="display:flex;flex-direction: column;">
+              <hr>
                 <?php
-              }
-            ?>
-            
-            <div>
-              <label>Item name : <?= htmlspecialchars($item['item_name'])?></label>
+                  if(!empty($item['item_photo'])){
+                    ?>
+                      <img src="<?= "../../../".$item['item_photo']?>" style="max-width:150px">
+                    <?php
+                  }
+                ?>
+                
+                <div>
+                  <label>Item name : <?= htmlspecialchars($item['item_name'])?></label>
+                </div>
+                <div>
+                  <label>Item description : <?= htmlspecialchars($item['item_description'])?></label>
+                </div>
+                <div>
+                  <label>Item Price : Rp. <?= htmlspecialchars($item['item_price'])?></label>
+                </div>
+                <div>
+                  <label>Item Stock : <?= htmlspecialchars($item['item_stock'])?></label>
+                </div>
+              </div>
+              </div>
+              <div style="height:auto;align-items: center;">
+                <form method="POST">
+                  <button type="submit">Update</button>
+                </form>
+                <form action="../../../actions/doDeleteItem.php" method="POST">
+                  <input type="hidden"name="item_id" value="<?=$item['item_id']?>">
+                  <button type="submit">Delete</button>
+                </form>
+              </div>
+              
             </div>
-            <div>
-              <label>Item description : <?= htmlspecialchars($item['item_description'])?></label>
-            </div>
-            <div>
-              <label>Item Price : Rp. <?= htmlspecialchars($item['item_price'])?></label>
-            </div>
-            <div>
-              <label>Item Stock : <?= htmlspecialchars($item['item_stock'])?></label>
-            </div>
-          </div>
-          <form method="POST">
-            <button type="submit">Update</button>
-          </form>
-          <form action="../../../actions/doDeleteItem.php" method="POST">
-            <input type="hidden"name="item_id" value="<?=$item['item_id']?>">
-            <button type="submit">Delete</button>
-          </form>
-        <hr>
-        <?php
-      }
-    ?>
+          <hr>
+          <?php
+        }
+      ?>
   </a>
   <a href="./insert.php">Insert Item</a>
 </body>
