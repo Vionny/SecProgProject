@@ -6,6 +6,7 @@
     private string $item_name;
     private string $item_description;
     private int $item_price;
+    private string $file_path;
     private int $item_stock;
 
     private $item_file;
@@ -16,6 +17,7 @@
       if($item_id!==null ){
         $this->item_id = $item_id;
       }
+      $this->file_path = $file_path;
       $this->seller_id = $seller_id;
       $this->item_name = $item_name;
       $this->item_description = $item_description;

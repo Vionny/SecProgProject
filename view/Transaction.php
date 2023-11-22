@@ -1,6 +1,6 @@
 <?php
     session_start();
-
+    require_once "../model/Item.php";
     function resetCart() {
         $_SESSION['cart'] = array();
     }
@@ -10,11 +10,7 @@
     }
 
     if (!isset($_SESSION['items'])) {
-        $_SESSION['items'] = array(
-            '1' => array('item_id' => 1, 'item_name' => 'Product 1', 'item_price' => 10, 'item_stock' => 50),
-            '2' => array('item_id' => 2, 'item_name' => 'Product 2', 'item_price' => 15, 'item_stock' => 30),
-            '3' => array('item_id' => 3, 'item_name' => 'Product 3', 'item_price' => 20, 'item_stock' => 20),
-        );
+        $_SESSION['items'] = array();
     }
 
     function generateTransactionId() {
@@ -82,24 +78,49 @@
         echo "<h2>Product List</h2>";
         if (!empty($items)) {
             echo "<ul>";
-            foreach ($items as $item) {
-                echo "<li>{$item['item_name']} - \${$item['item_price']} (Stock: {$item['item_stock']}) 
-                <form method='POST' action=''>
-                    <input type='hidden' name='item_id' value='{$item['item_id']}'>
-                    <label for='quantity'>Quantity:</label>
-                    <input type='number' name='quantity' value='1' min='1' max='{$item['item_stock']}' required>
-                    <button type='submit'>Add to Cart</button>
-                </form>
+            $query = "select * from items";
+    
+            $conn = new mysqli(
+      'localhost','root','','secprogdb');
+    $result = mysqli_query($conn, $query);
+      foreach ($result as $res) {
+          echo '<li>item name : '. $res['item_name'];
+          echo "<br>";
+          echo "item price : " . $res["item_price"];
+        echo "<br>";
+        echo "seller id : " . $res["seller_id"];
+        echo "<br>";
+        echo "item description : " . $res["item_description"];
+        echo "<br>";
+        echo "stock : " . $res["item_stock"];
+        echo "<br>";
+       echo "
+            <form method='POST' action=''>
+          <input type='hidden' name='item_id' value='{$res['item_id']}'>
+             <label for='quantity'>Quantity:</label>
+            <input type='number' name='quantity' value='1' min='1' max='{$res['item_stock']}' required>
+             <button type='submit'>Add to Cart</button>
+                </form>";
+
+      }
+            // foreach ($result as $results) {
+            //     echo "<li>{$results['item_name']} - \${$result['item_price']} (Stock: {$result['item_stock']}) 
+            //     <form method='POST' action=''>
+            //         <input type='hidden' name='item_id' value='{$result['item_id']}'>
+            //         <label for='quantity'>Quantity:</label>
+            //         <input type='number' name='quantity' value='1' min='1' max='{$item['item_stock']}' required>
+            //         <button type='submit'>Add to Cart</button>
+            //     </form>
                 
-                <!-- Add restock form -->
-                <form method='POST' action=''>
-                    <input type='hidden' name='restock_item_id' value='{$item['item_id']}'>
-                    <label for='restock_quantity'>Restock Quantity:</label>
-                    <input type='number' name='restock_quantity' value='1' min='1' required>
-                    <button type='submit'>Restock</button>
-                </form></li>";
-            }
-            echo "</ul>";
+            //     <!-- Add restock form -->
+            //     <form method='POST' action=''>
+            //         <input type='hidden' name='restock_item_id' value='{$item['item_id']}'>
+            //         <label for='restock_quantity'>Restock Quantity:</label>
+            //         <input type='number' name='restock_quantity' value='1' min='1' required>
+            //         <button type='submit'>Restock</button>
+            //     </form></li>";
+            // }
+            // echo "</ul>";
         } else {
             echo "No products available.";
         }
@@ -223,11 +244,44 @@
     <body>
         <div class="container">
             <h1>Welcome to our store</h1>
+            
+            <?php 
+                displayProducts($_SESSION['items']);
+            ?>
         
-            <?php displayProducts($_SESSION['items']); ?>
-        
-            <?php displayCart($_SESSION['items']); ?>
-
+            <?php 
+                displayCart($_SESSION['items']); 
+            ?>
+   <!-- <?php
+    $result = item::getSellerItem();
+      while($item = $result->fetch_assoc()){
+        ?>
+        <hr>
+          <div>
+            <div>
+              <label>Item name : <?= htmlspecialchars($item['item_name'])?></label>
+            </div>
+            <div>
+              <label>Item description : <?= htmlspecialchars($item['item_description'])?></label>
+            </div>
+            <div>
+              <label>Item Price : Rp. <?= htmlspecialchars($item['item_price'])?></label>
+            </div>
+            <div>
+              <label>Item Stock : <?= htmlspecialchars($item['item_stock'])?></label>
+            </div>
+          </div>
+          <form method="POST">
+            <button type="submit">Update</button>
+          </form>
+          <form action="../../../actions/doDeleteItem.php" method="POST">
+            <input type="hidden"name="item_id" value="<?=$item['item_id']?>">
+            <button type="submit">Delete</button>
+          </form>
+        <hr>
+        <?php
+      }
+    ?> -->
             <form method='POST' action=''>
                 <button type='submit' name='save_cart'>Save Cart</button>
             </form>

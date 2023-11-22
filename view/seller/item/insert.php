@@ -18,16 +18,9 @@
     <title></title>
 </head>
 <body>
-
-    <?php
-        if(isset($_SESSION["error"])) {
-            echo "<p>". $_SESSION["error"] ."</p>";
-            unset($_SESSION["error"]);
-        }
-    ?>
-
-    <form action="../../../actions/doInsertItem.php" method="POST" enctype="multipart/form-data">
-      <input type="hidden" name="token" value="<?= generateToken();?>">
+    <form action="../../../actions/doInsertItem.php" method="POST"
+    enctype="multipart/form-data"
+    >
     item name :
     
     <input type="text"  name="item_name" required>
