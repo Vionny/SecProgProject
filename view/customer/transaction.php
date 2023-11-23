@@ -1,5 +1,4 @@
 <?php
-    session_start();
     require_once "../../db/dbConnection.php";
     require_once "../../middleware/AuthMiddleware.php";
     require_once "../../middleware/RoleMiddleware.php";
@@ -35,8 +34,6 @@
         </div>
         <div>
             <?php
-                session_start();
-
                 require_once '../../db/DBConnection.php';
 
                 $conn = Connect::getInstance()->getDBConnection();
