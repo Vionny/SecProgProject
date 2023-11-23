@@ -47,12 +47,12 @@ function saveCart($cart) {
     }
 
     date_default_timezone_set('Asia/Jakarta');
-
+    // var_dump($cart);
     $stmt = $conn->prepare("INSERT INTO transactions_header (customer_id, seller_id, transaction_date) VALUES (?, ?, ?)");
     $user = AuthMiddleware::getInstance()->checkAuth();
     $customerId = $user['user_id'];
     $sellerId = 1;
-    $transactionDate = date('Y-m-d H:i:s');
+    $transactionDate = date('Y-m-d');
     $stmt->bind_param("iis", $customerId, $sellerId, $transactionDate);
     $stmt->execute();
     $stmt->close();
