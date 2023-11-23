@@ -18,8 +18,8 @@
 </head>
 <body>
   <h1>WELCOME SELLER</h1> 
-    <a href="">
-        <button>Choose game to sell item</button>
+    <a href="./insert.php">
+        <button>add item to sell</button>
     </a>
     <br><br><br>
     
@@ -32,9 +32,11 @@
               <hr>
                 <?php
                   if(!empty($item['item_photo'])){
-                    ?>
-                      <img src="<?= "../../../".$item['item_photo']?>" style="max-width:150px">
-                    <?php
+                   
+                        
+                        echo "<img src= ../../" . $item["item_photo"]
+                        . " style=max-width:150px>";
+                      
                   }
                 ?>
                 
@@ -68,6 +70,6 @@
         }
       ?>
   </a>
-  <a href="./insert.php">Insert Item</a>
+ 
 </body>
 </html>

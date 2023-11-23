@@ -42,7 +42,7 @@
         $_SESSION["error"] = "Please upload an image file, max. 10 MB";
         return false;
       }
-
+        
       if (!in_array($item_file_mime_type, $allowed_mime_types, true) || !in_array($item_file_extension, $allowed_file_extensions, true)) {
         $_SESSION['error'] = 'Please upload an image file';
         return false;

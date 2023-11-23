@@ -33,7 +33,7 @@
     <br><br>
     item price :
     <!-- <br> -->
-    <input type="text"  name="item_price" required>
+    <input type="number"  name="item_price" required>
 
     <br><br>
     item stock :
@@ -49,6 +49,7 @@
     <br><br>
     <input type="submit" name="submit" value="submit">
     </form>
+    
 </body>
 </html>
 
