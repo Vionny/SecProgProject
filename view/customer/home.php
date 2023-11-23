@@ -1,4 +1,5 @@
 <?php
+  session_start();
   require_once "../../db/dbConnection.php";
   require_once "../../middleware/AuthMiddleware.php";
   require_once "../../middleware/RoleMiddleware.php";

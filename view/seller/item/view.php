@@ -55,9 +55,9 @@
               </div>
               </div>
               <div style="height:auto;align-items: center;">
-                <form method="POST">
+                <!-- <form method="POST">
                   <button type="submit">Update</button>
-                </form>
+                </form> -->
                 <form action="../../../actions/doDeleteItem.php" method="POST">
                   <input type="hidden"name="item_id" value="<?=$item['item_id']?>">
                   <button type="submit">Delete</button>

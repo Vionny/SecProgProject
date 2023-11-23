@@ -1,4 +1,6 @@
 <?php
+ 
+
   class RoleMiddleware{
     private static $instance;
     protected $conn;

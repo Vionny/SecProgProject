@@ -19,10 +19,11 @@
       <a href="./item/view.php">View Items</a>
     </div>
     <div>
-      <a href="">Transaction</a>
+      <a href="./item/insert.php">Add Item</a>
     </div>
     <div>
-      <a href="./item/insert.php">Add Item</a>
+      
+      <a href="./transaction.php">Transaction</a>
     </div>
     <div>
       <a href="../../actions/doLogout.php">Logout</a>
