@@ -19,6 +19,8 @@
   $user_password = $_POST['seller_password'];
   $seller_name = $_POST['seller_name'];
   $seller_address = $_POST['seller_address'];
+  
+  $_SESSION['username'] = $_POST['seller_name'];
 
   $isInserted = $auth->registerAsSeller($user_email, $user_password, $seller_name, $seller_address);
 

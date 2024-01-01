@@ -2,7 +2,7 @@
   require_once "../../db/dbConnection.php";
   require_once "../../middleware/AuthMiddleware.php";
   require_once "../../middleware/RoleMiddleware.php";
-
+    require_once "../utils/tokenService.php";
   RoleMiddleware::getInstance()->checkRole('customer');
 ?>
 
@@ -11,6 +11,12 @@
 
     function displayTransactionDetails($transactionId, $savedCarts) {
         echo "<h2>Transaction Details</h2>";
+
+        if(getToken() !== $_POST['token']){
+            $_SESSION['error'] = "Token invalid";
+            header("Location: registerCustomer.php");
+            die();
+          }
 
         if (isset($savedCarts[$transactionId])) {
             $transaction = $savedCarts[$transactionId]['cart'];

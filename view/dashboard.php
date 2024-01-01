@@ -14,7 +14,7 @@
     <title>Web - Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <?= $_SESSION["username"] ?></h1>
+    <h1>Welcome</h1>
     <a href="../controller/Logout.php"><button>Log Out</button></a>
 </body>
 </html>

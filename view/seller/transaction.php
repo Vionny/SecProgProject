@@ -5,6 +5,14 @@
     require_once "../../middleware/RoleMiddleware.php";
   
     RoleMiddleware::getInstance()->checkRole('seller');
+
+
+    require_once "../../utils/tokenService.php";
+  if(getToken() !== $_POST['token']){
+    $_SESSION['error'] = "Token invalid";
+    header("Location: ../registerSeller.php");
+    die();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
