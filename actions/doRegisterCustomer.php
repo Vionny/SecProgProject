@@ -21,6 +21,8 @@ $customer_first_name = $_POST['customer_first_name'];
 $customer_last_name = $_POST['customer_last_name'];
 $customer_dob = $_POST['customer_dob'];
 
+$_SESSION['username'] = $_POST['customer_first_name'];
+
 $isInserted = $auth->registerAsCustomer($user_email, $user_password, $customer_first_name, $customer_last_name,$customer_dob);
 
 if($isInserted){

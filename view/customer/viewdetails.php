@@ -5,6 +5,13 @@
 
     RoleMiddleware::getInstance()->checkRole('customer');
 
+    require_once "../../utils/tokenService.php";
+    if(getToken() !== $_POST['token']){
+        $_SESSION['error'] = "Token invalid";
+        header("Location: ../../registerCustomer.php");
+        die();
+      }
+
     function displayTransactionDetails($transactionId, $savedCarts, $conn) {
         echo "<h2>Transaction Details</h2>";
 

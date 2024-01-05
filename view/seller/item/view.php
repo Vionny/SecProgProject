@@ -7,6 +7,13 @@
   RoleMiddleware::getInstance()->checkRole('seller');
 
   $result = item::getSellerItem();
+
+  require_once "../../utils/tokenService.php";
+  if(getToken() !== $_POST['token']){
+    $_SESSION['error'] = "Token invalid";
+    header("Location: ../../registerSeller.php");
+    die();
+  }
 ?>
 
 <!DOCTYPE html>

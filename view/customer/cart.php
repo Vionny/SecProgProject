@@ -2,7 +2,7 @@
     require_once "../../db/dbConnection.php";
     require_once "../../middleware/AuthMiddleware.php";
     require_once "../../middleware/RoleMiddleware.php";
-
+    require_once "../../utils/tokenService.php";
     RoleMiddleware::getInstance()->checkRole('customer');
     $conn = Connect::getInstance()->getDBConnection();
 
@@ -11,6 +11,12 @@
     function resetCart() {
         $_SESSION['cart'] = array();
     }
+
+    if(getToken() !== $_POST['token']){
+        $_SESSION['error'] = "Token invalid";
+        header("Location: ../../registerCustomer.php");
+        die();
+      }
 
     function fetchItemsFromDatabase() {
         global $conn;

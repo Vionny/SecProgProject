@@ -39,9 +39,9 @@
         </form>
     </div>
 
-    <a href="registercustomer.php">register for customer</a>
+    <a href="registerCustomer.php">register for customer</a>
                 <br>
-    <a href="registerseller.php">register for seller</a>
+    <a href="registerSeller.php">register for seller</a>
 
    
 

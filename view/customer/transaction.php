@@ -4,6 +4,13 @@
     require_once "../../middleware/RoleMiddleware.php";
   
     RoleMiddleware::getInstance()->checkRole('customer');
+
+    require_once "../../utils/tokenService.php";
+    if(getToken() !== $_POST['token']){
+        $_SESSION['error'] = "Token invalid";
+        header("Location: ../../registerCustomer.php");
+        die();
+      }
 ?>
 <!DOCTYPE html>
 <html lang="en">
